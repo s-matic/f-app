@@ -1,14 +1,19 @@
 import React from 'react';
 import { Text, ScrollView, StyleSheet, View } from 'react-native';
+import { FeedbackList } from '../components/FeedbackList';
 
 export class ReceiveFeedback extends React.Component {
   render() {
     //return <Text {...this.props} style={[this.props.style, { fontFamily: 'space-mono' }]} />;
-    return <ScrollView style={styles.wrapper} contentContainerStyle={styles.contentContainer}>
+    return (
+        <ScrollView style={styles.wrapper} contentContainerStyle={styles.contentContainer}>
             <View style={styles.container}>
                 <Text style={styles.heading}>Feedback</Text>
             </View>
-           </ScrollView>
+            <View>
+                <FeedbackList></FeedbackList>
+            </View>
+        </ScrollView>);
   }
 };
 const styles = StyleSheet.create({
@@ -20,10 +25,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     }, 
     container: {
-        marginTop: 100
+        marginTop: 20
     },
     heading: {
         fontSize: 30,
-        textAlign: 'center'
+        textAlign: 'center',
+        marginBottom: 20
     }
 });
