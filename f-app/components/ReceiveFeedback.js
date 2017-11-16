@@ -4,6 +4,8 @@ import { FeedbackList } from '../components/FeedbackList';
 
 const API_ENDPOINT = 'http://localhost:5002/api/';
 
+const API_ENDPOINT = 'http://localhost:5002/api/';
+
 export class ReceiveFeedback extends React.Component {
     getFeedback() {
         fetch(API_ENDPOINT + 'feedback', {
