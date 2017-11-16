@@ -12,10 +12,48 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
+const API_ENDPOINT = 'localhost:5000/api/';
+
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
+
+  saveUserType(userType) {
+    try {
+      await AsyncStorage.setItem('@FappStore:userType', userType);
+    } catch (error) {
+      // Error saving data
+    }
+  }
+
+  getUserType(){
+    try {
+      const value = await AsyncStorage.getItem('@FappStore:userType');
+      if (value !== null){
+        // We have data!!
+        console.log(value);
+
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  }
+
+  getFeedback(){
+    fetch(PUSH_ENDPOINT + 'feedback', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        token: {
+          value: token,
+        },
+      }),
+    });
+  }
 
   render() {
     return (
