@@ -20,26 +20,11 @@ export class FeedbackList extends React.Component {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           }
-        }).then(function (result) {
-          let _feedbackList = {
-            feedback: [
-              {
-                Id: 1,
-                IsPositive: true,
-                Created: '2017-11-16 11:27'
-              },
-              {
-                id: 2,
-                IsPositive: true,
-                Created: '2017-11-16 11:36'
-              },
-              {
-                id: 3,
-                IsPositive: false,
-                Created: '2017-11-16 12:10'
-              }
-            ]
-          };
+        })
+        .then((response) => response.json())
+        .then(function (responseJSON){
+          let _feedbackList = responseJSON;
+          console.log(_feedbackList);
           this.setState({ feedbackList: _feedbackList });
         }.bind(this));
       }
@@ -51,20 +36,20 @@ export class FeedbackList extends React.Component {
         return (
           <View style={styles.wrapper}>
             <FlatList
-              data={this.state.feedbackList.feedback}
+              data={this.state.feedbackList}
               renderItem={({item}) => 
                 <Grid>
                     <Col size={5}>
                     {
-                        item.IsPositive == true ?
-                         <Image source={require('../assets/images/robot-dev.png')}/> 
+                        item.isPositive == true ?
+                         <Feather name='thumbs-up' size={42} color='green' />
                         : 
-                        <Image source={require('../assets/images/robot-prod.png')}/>                         
+                        <Feather name='thumbs-down' size={42} color='red' />                        
                         }
                         <Text style={styles.item}></Text>
                     </Col>
                     <Col size={4}>
-                        <Text style={styles.item}>{item.Created}</Text>
+                        <Text style={styles.item}>{item.date}</Text>
                     </Col>
                   </Grid>
                 }
