@@ -7,59 +7,145 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Modal,
+  TouchableHighlight,
+  AsyncStorage
 } from 'react-native';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 import { WebBrowser } from 'expo';
 
+import { SimpleLineIcons, MaterialIcons } from '@expo/vector-icons';
 import { MonoText } from '../components/StyledText';
+import { SendFeedback } from '../components/SendFeedback';
+import { ReceiveFeedback } from '../components/ReceiveFeedback';
+import { style } from 'expo/src/Font';
+
+const API_ENDPOINT = 'localhost:5000/api/';
 
 export default class HomeScreen extends React.Component {
+  state = {
+    modalVisible: true,
+    feedbackList: {},
+    userType: ''
+  };
   static navigationOptions = {
     header: null,
   };
 
+  saveUserType(userType) {
+    try {
+      AsyncStorage.setItem('@FappStore:userType', userType);
+      this.setState({ userType: userType });
+      console.log(this.state.userType);
+    } catch (error) {
+      // Error saving data
+      console.log(error);
+    }
+  }
+
+  getUserType() {
+    try {
+      const value = AsyncStorage.getItem('@FappStore:userType');
+      if (value !== null) {
+        // We have data!!
+        console.log(value);
+
+      }
+    } catch (error) {
+      // Error retrieving data'
+      console.log(error);
+    }
+  }
+
+  getFeedback() {
+    fetch(PUSH_ENDPOINT + 'feedback', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }
+    }).then(function (result) {
+      let _feedbackList = {
+        feedback: [
+          {
+            Id: 1,
+            IsPositive: true,
+            Created: '2017-11-16 11:27'
+          },
+          {
+            id: 2,
+            IsPositive: true,
+            Created: '2017-11-16 11:36'
+          },
+          {
+            id: 3,
+            IsPositive: false,
+            Created: '2017-11-16 12:10'
+          }
+        ]
+      };
+      this.setState({ feedbackList: _feedbackList });
+    });
+  }
+
+
+
+  setUserType(userType) {
+    console.log('setUserType');
+    this.saveUserType(userType);
+    this.setModalVisible(!this.state.modalVisible);
+  }
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible });
+  }
+
   render() {
+    let feedbackView = null;
+
+    if(this.state.userType == 'sender')
+      feedbackView = <SendFeedback></SendFeedback>
+
+    if (this.state.userType == 'receiver')
+      feedbackView = <ReceiveFeedback></ReceiveFeedback>
+
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-          </View>
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => { alert("Modal has been closed.") }}
+        >
+          <View style={styles.wrapper}>
+            <View style={styles.flexContainer}>
+              <Text style={styles.heading}>Välkommen till F-appen!</Text>
 
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
+            <View style={styles.center}>
+              <TouchableHighlight  onPress={() => {
+                this.setUserType('sender')
+              }}>
+                <View style={styles.asd}>
+                  <Text style={styles.SendFeedbackBtn}>Ge Feedback</Text>
+                  <SimpleLineIcons name='present' size={30} color='white' />
+                </View>
+              </TouchableHighlight>
             </View>
-
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
+            <View style={styles.center}>
+              <TouchableHighlight onPress={() => {
+                this.setUserType('receiver')
+              }}>
+                <View style={styles.asd}>
+                  <Text style={styles.receiveFeedbackBtn}>Ta emot Feedback</Text>
+                  <MaterialIcons name='call-received' size={30} color='white' />
+                </View>
+              </TouchableHighlight>
+            </View>
           </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
           </View>
-        </ScrollView>
+        </Modal>
 
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
+        {feedbackView}
 
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
-          </View>
-        </View>
       </View>
     );
   }
@@ -97,11 +183,57 @@ export default class HomeScreen extends React.Component {
     );
   };
 }
-
+let giveFbg = '#103063';
+let receiveFbg = '#103063';
+let btnWidth = 260;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingHorizontal: 45
+  },
+  flexContainer: {
+
+  },
+  wrapper: {
+    marginTop: 22,
+    paddingHorizontal: 10,
+  },
+  center: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  heading: {
+    marginTop: 100,
+    marginBottom: 50,
+    fontSize: 40,
+    textAlign: 'center',
+  },
+  SendFeedbackBtn: {
+    color: '#fff',
+    paddingHorizontal: 10,
+    paddingVertical: 25,
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginRight: 5
+  },
+  receiveFeedbackBtn: {
+    color: '#fff',
+    backgroundColor: receiveFbg,
+    paddingHorizontal: 10,
+    paddingVertical: 25,
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  asd: {
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: giveFbg,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: btnWidth,
   },
   developmentModeText: {
     marginBottom: 20,
