@@ -14,6 +14,8 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
+import { GiveFeedback } from '../components/GiveFeedback';
+import { ReceiveFeedback } from '../components/ReceiveFeedback';
 
 const API_ENDPOINT = 'localhost:5000/api/';
 
@@ -106,12 +108,15 @@ export default class HomeScreen extends React.Component {
             <TouchableHighlight onPress={() => {
               this.setModalVisible(!this.state.modalVisible)
             }}>
-              <Text style={styles.reciveFeedbackBtn}>Ta emot Feedback</Text>
+              <Text style={styles.receiveFeedbackBtn}>Ta emot Feedback</Text>
             </TouchableHighlight>
             </View>
           </View>
          </View>
         </Modal>
+        
+        <GiveFeedback></GiveFeedback>
+        <ReceiveFeedback></ReceiveFeedback>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
             <Image
@@ -191,7 +196,7 @@ export default class HomeScreen extends React.Component {
   };
 }
 let giveFbg = '#103063';
-let reciveFbg = '#103063';
+let receiveFbg = '#103063';
 let btnWidth = 220;
 const styles = StyleSheet.create({
   container: {
@@ -225,9 +230,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  reciveFeedbackBtn: {
+  receiveFeedbackBtn: {
     color: '#fff',
-    backgroundColor: reciveFbg,
+    backgroundColor: receiveFbg,
     paddingHorizontal: 10,
     paddingVertical: 25,
     width: btnWidth,
