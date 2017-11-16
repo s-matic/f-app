@@ -1,49 +1,56 @@
 import React from 'react';
-import { Text, ScrollView, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Text, ScrollView, StyleSheet, View, TouchableOpacity, Alert } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { style } from 'expo/src/Font';
+
+const API_ENDPOINT = 'http://localhost:5002/api/';
+
 export class SendFeedback extends React.Component {
     state = {
         modalVisible: true,
-      };
-      setModalVisible(visible) {
-        this.setState({modalVisible: visible});
-      }
-      saveFeedback(feedback) {
-        fetch(PUSH_ENDPOINT + 'feedback', {
+    };
+    saveFeedback(_isPositive) {
+        fetch(API_ENDPOINT + 'feedback', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                token: {
-                    value: token,
-                },
+                isPositive: _isPositive
             }),
-        })
+        }).then(function () {
+            Alert.alert(
+                'Feedback mottagen',
+                'Din feedback har registrerats och tagits emot av mottagaren!',
+                [
+                    { text: 'OK', onPress: () => console.log('OK Pressed') },
+                ],
+                { cancelable: false }
+            )
+        });
     }
-  render() {
-    //return <Text {...this.props} style={[this.props.style, { fontFamily: 'space-mono' }]} />;
-    return <View style={styles.wrapper} contentContainerStyle={styles.contentContainer}>
-                <View style={styles.container}>
-                    <Text style={styles.heading}>Skicka feedback</Text>
-                    <Grid>
-                        <Col style={styles.center}>
-                        <TouchableOpacity  onPress={() => {this.setModalVisible(!this.state.modalVisible)}}>
+    render() {
+        //return <Text {...this.props} style={[this.props.style, { fontFamily: 'space-mono' }]} />;
+        return <View style={styles.wrapper} contentContainerStyle={styles.contentContainer}>
+            <View style={styles.container}>
+                <Text style={styles.heading}>Skicka feedback</Text>
+                <Grid>
+                    <Col style={styles.center}>
+                        <TouchableOpacity onPress={() => { this.saveFeedback(true) }}>
                             <Feather name='thumbs-up' size={82} color='green' />
                         </TouchableOpacity>
-                        </Col>
-                        <Col style={styles.center}>
-                        <TouchableOpacity  onPress={() => {this.setModalVisible(!this.state.modalVisible)}}>
+                    </Col>
+                    <Col style={styles.center}>
+                        <TouchableOpacity onPress={() => { this.saveFeedback(false) }}>
                             <Feather name='thumbs-down' size={82} color='red' />
                         </TouchableOpacity>
-                        </Col>
-                    </Grid>
-                </View>
-           </View>
-  }
+                    </Col>
+                </Grid>
+            </View>
+        </View>
+    }
 };
 const styles = StyleSheet.create({
     contentContainer: {
