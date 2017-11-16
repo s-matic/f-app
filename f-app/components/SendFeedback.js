@@ -1,15 +1,17 @@
 import React from 'react';
-import { Text, ScrollView, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Text, ScrollView, StyleSheet, View, TouchableOpacity, Alert } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { style } from 'expo/src/Font';
+
+const API_ENDPOINT = 'http://localhost:5002/api/';
+
 export class SendFeedback extends React.Component {
     state = {
         modalVisible: true,
     };
-
     saveFeedback(_isPositive) {
-        fetch(PUSH_ENDPOINT + 'feedback', {
+        fetch(API_ENDPOINT + 'feedback', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

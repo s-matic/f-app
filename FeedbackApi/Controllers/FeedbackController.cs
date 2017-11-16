@@ -39,7 +39,7 @@ namespace FeedbackApi.Controllers
              _context.Feedbacks.Add(feedback);
              _context.SaveChanges();
 
-            return CreatedAtRoute("Feedback", feedback);
+            return Ok();
         }   
     }
 

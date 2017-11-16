@@ -57,39 +57,6 @@ export default class HomeScreen extends React.Component {
     }
   }
 
-  getFeedback() {
-    fetch(PUSH_ENDPOINT + 'feedback', {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }
-    }).then(function (result) {
-      let _feedbackList = {
-        feedback: [
-          {
-            Id: 1,
-            IsPositive: true,
-            Created: '2017-11-16 11:27'
-          },
-          {
-            id: 2,
-            IsPositive: true,
-            Created: '2017-11-16 11:36'
-          },
-          {
-            id: 3,
-            IsPositive: false,
-            Created: '2017-11-16 12:10'
-          }
-        ]
-      };
-      this.setState({ feedbackList: _feedbackList });
-    });
-  }
-
-
-
   setUserType(userType) {
     console.log('setUserType');
     this.saveUserType(userType);
