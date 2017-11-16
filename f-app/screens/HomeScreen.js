@@ -23,7 +23,6 @@ export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
-<<<<<<< HEAD
 
   saveUserType(userType) {
     try {
@@ -61,11 +60,10 @@ export default class HomeScreen extends React.Component {
     });
   }
 
-=======
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
->>>>>>> 43036abdc407cefad9c817194c04c6eb8299230d
+
   render() {
     return (
       <View style={styles.container}>
