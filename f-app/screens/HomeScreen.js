@@ -7,6 +7,8 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Modal,
+  TouchableHighlight
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
@@ -15,9 +17,13 @@ import { MonoText } from '../components/StyledText';
 const API_ENDPOINT = 'localhost:5000/api/';
 
 export default class HomeScreen extends React.Component {
+  state = {
+    modalVisible: true,
+  };
   static navigationOptions = {
     header: null,
   };
+<<<<<<< HEAD
 
   saveUserType(userType) {
     try {
@@ -55,9 +61,39 @@ export default class HomeScreen extends React.Component {
     });
   }
 
+=======
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+  }
+>>>>>>> 43036abdc407cefad9c817194c04c6eb8299230d
   render() {
     return (
       <View style={styles.container}>
+             <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {alert("Modal has been closed.")}}
+          >
+         <View style={{marginTop: 22}}>
+          <View style={styles.flexContainer}>
+            <Text style={styles.heading}>Välkommen till F-appen!</Text>
+
+            <TouchableHighlight  onPress={() => {
+              this.setModalVisible(!this.state.modalVisible)
+            }}>
+              <Text style={styles.giveFeedbackBtn}>aaaaaa</Text>
+            </TouchableHighlight>
+
+            <TouchableHighlight onPress={() => {
+              this.setModalVisible(!this.state.modalVisible)
+            }}>
+              <Text style={styles.reciveFeedbackBtn}>dsasad</Text>
+            </TouchableHighlight>
+
+          </View>
+         </View>
+        </Modal>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
             <Image
@@ -68,6 +104,7 @@ export default class HomeScreen extends React.Component {
               }
               style={styles.welcomeImage}
             />
+            
           </View>
 
           <View style={styles.getStartedContainer}>
@@ -135,11 +172,34 @@ export default class HomeScreen extends React.Component {
     );
   };
 }
-
+let giveFbg = '#ebebeb';
+let reciveFbg = '#ebebeb';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  flexContainer: {},
+  heading: {
+    marginTop: 100,
+    fontWeight: 'bold',
+    fontSize: 30,
+    textAlign: 'center',
+  },
+  giveFeedbackBtn: {
+    color: '#103063',
+    backgroundColor: giveFbg,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    width: 100,
+
+  },
+  reciveFeedbackBtn: {
+
+    backgroundColor: reciveFbg,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    width: 100,
   },
   developmentModeText: {
     marginBottom: 20,
