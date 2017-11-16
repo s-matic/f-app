@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   View,
   Modal,
-  TouchableHighlight
+  TouchableHighlight,
+  AsyncStorage
 } from 'react-native';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { WebBrowser } from 'expo';
@@ -32,8 +33,11 @@ export default class HomeScreen extends React.Component {
   saveUserType(userType) {
     try {
       AsyncStorage.setItem('@FappStore:userType', userType);
+      this.setState({userType: userType});
+      console.log(this.state.userType);
     } catch (error) {
       // Error saving data
+      console.log(error);
     }
   }
 
@@ -46,7 +50,8 @@ export default class HomeScreen extends React.Component {
 
       }
     } catch (error) {
-      // Error retrieving data
+      // Error retrieving data'
+      console.log(error);      
     }
   }
 
@@ -84,8 +89,9 @@ export default class HomeScreen extends React.Component {
 
 
   setUserType(userType){
+    console.log('setUserType');   
+    this.saveUserType(userType);    
     this.setModalVisible(!this.state.modalVisible);
-    this.saveUserType(userType);
   }
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
@@ -93,8 +99,12 @@ export default class HomeScreen extends React.Component {
 
   render() {
     let feedbackView = null;
+
     if(this.state.userType == 'sender')
       feedbackView = <GiveFeedback></GiveFeedback>
+
+    if(this.state.userType == 'receiver')
+      feedbackView = <ReceiveFeedback></ReceiveFeedback>
 
     return (
       <View style={styles.container}>
@@ -125,54 +135,9 @@ export default class HomeScreen extends React.Component {
           </View>
          </View>
         </Modal>
-<<<<<<< HEAD
 
-=======
-        
-        <GiveFeedback></GiveFeedback>
-        <ReceiveFeedback></ReceiveFeedback>
->>>>>>> 23d882846a215ecc667ba05f9d58594f5403352c
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            />
-            
-          </View>
+        {feedbackView}
 
-          <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
-            </View>
-
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
-          </View>
-
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
-          </View>
-        </View>
       </View>
     );
   }
