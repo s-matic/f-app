@@ -14,9 +14,11 @@ import {
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { WebBrowser } from 'expo';
 
+import {  SimpleLineIcons } from '@expo/vector-icons';
 import { MonoText } from '../components/StyledText';
 import { GiveFeedback } from '../components/GiveFeedback';
 import { ReceiveFeedback } from '../components/ReceiveFeedback';
+import { style } from 'expo/src/Font';
 
 const API_ENDPOINT = 'localhost:5000/api/';
 
@@ -122,7 +124,10 @@ export default class HomeScreen extends React.Component {
             <TouchableHighlight  onPress={() => {
               this.setUserType('sender')
             }}>
+            <View style={styles.asd}>
               <Text style={styles.giveFeedbackBtn}>Ge Feedback</Text>
+              <SimpleLineIcons name='present' size={30} color='white' />
+            </View>
             </TouchableHighlight>
             </View>
             <View style={styles.center}>
@@ -177,11 +182,12 @@ export default class HomeScreen extends React.Component {
 }
 let giveFbg = '#103063';
 let receiveFbg = '#103063';
-let btnWidth = 220;
+let btnWidth = 270;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingHorizontal: 45
   },
   flexContainer: {
 
@@ -197,15 +203,14 @@ const styles = StyleSheet.create({
   heading: {
     marginTop: 100,
     marginBottom:  50,
-    fontSize: 36,
+    fontSize: 40,
     textAlign: 'center',
   },
   giveFeedbackBtn: {
     color: '#fff',
-    backgroundColor: giveFbg,
     paddingHorizontal: 10,
     paddingVertical: 25,
-    width: btnWidth,
+    
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
@@ -219,6 +224,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  asd: {
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: giveFbg,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: btnWidth,
   },
   developmentModeText: {
     marginBottom: 20,

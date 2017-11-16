@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, ScrollView, StyleSheet, View, TouchableHighlight } from 'react-native';
-
+import { Feather } from '@expo/vector-icons';
+import { Col, Row, Grid } from 'react-native-easy-grid';
+import { style } from 'expo/src/Font';
 export class GiveFeedback extends React.Component {
     state = {
         modalVisible: true,
@@ -11,13 +13,19 @@ export class GiveFeedback extends React.Component {
   render() {
     //return <Text {...this.props} style={[this.props.style, { fontFamily: 'space-mono' }]} />;
     return <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-                <View>  
-                    <TouchableHighlight  onPress={() => {this.setModalVisible(!this.state.modalVisible)}}>
-                        <Text style={styles.giveFeedbackBtn}>Bra</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight  onPress={() => {this.setModalVisible(!this.state.modalVisible)}}>
-                        <Text style={styles.giveFeedbackBtn}>Dåligt</Text>
-                    </TouchableHighlight>
+                <View>
+                    <Grid>
+                        <Col style={styles.center}>
+                        <TouchableHighlight  onPress={() => {this.setModalVisible(!this.state.modalVisible)}}>
+                            <Feather name='thumbs-up' size={82} color='green' />
+                        </TouchableHighlight>
+                        </Col>
+                        <Col style={styles.center}>
+                        <TouchableHighlight  onPress={() => {this.setModalVisible(!this.state.modalVisible)}}>
+                            <Feather name='thumbs-down' size={82} color='red' />
+                        </TouchableHighlight>
+                        </Col>
+                    </Grid>
                 </View>
            </ScrollView>
   }
@@ -29,5 +37,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-    }
+    },
+    center: {
+        alignItems: 'center',
+        marginBottom: 30,
+        marginTop: 200,
+    },
 });
