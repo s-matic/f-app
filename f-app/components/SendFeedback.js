@@ -10,6 +10,20 @@ export class SendFeedback extends React.Component {
       setModalVisible(visible) {
         this.setState({modalVisible: visible});
       }
+      saveFeedback(feedback) {
+        fetch(PUSH_ENDPOINT + 'feedback', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                token: {
+                    value: token,
+                },
+            }),
+        })
+    }
   render() {
     //return <Text {...this.props} style={[this.props.style, { fontFamily: 'space-mono' }]} />;
     return <View style={styles.wrapper} contentContainerStyle={styles.contentContainer}>
@@ -33,7 +47,7 @@ export class SendFeedback extends React.Component {
 };
 const styles = StyleSheet.create({
     contentContainer: {
-    paddingVertical: 20
+        paddingVertical: 20
     },
     wrapper: {
         flex: 1,
