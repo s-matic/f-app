@@ -10,6 +10,7 @@ import {
   Modal,
   TouchableHighlight
 } from 'react-native';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
@@ -26,7 +27,7 @@ export default class HomeScreen extends React.Component {
 
   saveUserType(userType) {
     try {
-      await AsyncStorage.setItem('@FappStore:userType', userType);
+       AsyncStorage.setItem('@FappStore:userType', userType);
     } catch (error) {
       // Error saving data
     }
@@ -34,7 +35,7 @@ export default class HomeScreen extends React.Component {
 
   getUserType(){
     try {
-      const value = await AsyncStorage.getItem('@FappStore:userType');
+      const value =  AsyncStorage.getItem('@FappStore:userType');
       if (value !== null){
         // We have data!!
         console.log(value);
@@ -67,28 +68,30 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-             <Modal
+        <Modal
           animationType="slide"
           transparent={false}
           visible={this.state.modalVisible}
           onRequestClose={() => {alert("Modal has been closed.")}}
-          >
-         <View style={{marginTop: 22}}>
+        >
+         <View style={styles.wrapper}>
           <View style={styles.flexContainer}>
             <Text style={styles.heading}>Välkommen till F-appen!</Text>
 
+          <View style={styles.center}>
             <TouchableHighlight  onPress={() => {
               this.setModalVisible(!this.state.modalVisible)
             }}>
-              <Text style={styles.giveFeedbackBtn}>aaaaaa</Text>
+              <Text style={styles.giveFeedbackBtn}>Ge Feedback</Text>
             </TouchableHighlight>
-
+            </View>
+            <View style={styles.center}>
             <TouchableHighlight onPress={() => {
               this.setModalVisible(!this.state.modalVisible)
             }}>
-              <Text style={styles.reciveFeedbackBtn}>dsasad</Text>
+              <Text style={styles.reciveFeedbackBtn}>Ta emot Feedback</Text>
             </TouchableHighlight>
-
+            </View>
           </View>
          </View>
         </Modal>
@@ -170,34 +173,50 @@ export default class HomeScreen extends React.Component {
     );
   };
 }
-let giveFbg = '#ebebeb';
-let reciveFbg = '#ebebeb';
+let giveFbg = '#103063';
+let reciveFbg = '#103063';
+let btnWidth = 220;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
   },
-  flexContainer: {},
+  flexContainer: {
+
+  },
+  wrapper: {
+    marginTop: 22,
+    paddingHorizontal: 10,
+  },
+  center: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
   heading: {
     marginTop: 100,
-    fontWeight: 'bold',
-    fontSize: 30,
+    marginBottom:  50,
+    fontSize: 36,
     textAlign: 'center',
   },
   giveFeedbackBtn: {
-    color: '#103063',
+    color: '#fff',
     backgroundColor: giveFbg,
     paddingHorizontal: 10,
-    paddingVertical: 10,
-    width: 100,
-
+    paddingVertical: 25,
+    width: btnWidth,
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   reciveFeedbackBtn: {
-
+    color: '#fff',
     backgroundColor: reciveFbg,
     paddingHorizontal: 10,
-    paddingVertical: 10,
-    width: 100,
+    paddingVertical: 25,
+    width: btnWidth,
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   developmentModeText: {
     marginBottom: 20,
