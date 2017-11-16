@@ -33,7 +33,7 @@ export default class HomeScreen extends React.Component {
   saveUserType(userType) {
     try {
       AsyncStorage.setItem('@FappStore:userType', userType);
-      this.setState({userType: userType});
+      this.setState({ userType: userType });
       console.log(this.state.userType);
     } catch (error) {
       // Error saving data
@@ -41,28 +41,28 @@ export default class HomeScreen extends React.Component {
     }
   }
 
-  getUserType(){
+  getUserType() {
     try {
       const value = AsyncStorage.getItem('@FappStore:userType');
-      if (value !== null){
+      if (value !== null) {
         // We have data!!
         console.log(value);
 
       }
     } catch (error) {
       // Error retrieving data'
-      console.log(error);      
+      console.log(error);
     }
   }
 
-  getFeedback(){
+  getFeedback() {
     fetch(PUSH_ENDPOINT + 'feedback', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       }
-    }).then(function(result){
+    }).then(function (result) {
       let _feedbackList = {
         feedback: [
           {
@@ -73,12 +73,12 @@ export default class HomeScreen extends React.Component {
           {
             id: 2,
             IsPositive: true,
-            Created: '2017-11-16 11:36'            
+            Created: '2017-11-16 11:36'
           },
           {
             id: 3,
             IsPositive: false,
-            Created: '2017-11-16 12:10'            
+            Created: '2017-11-16 12:10'
           }
         ]
       };
@@ -88,22 +88,22 @@ export default class HomeScreen extends React.Component {
 
 
 
-  setUserType(userType){
-    console.log('setUserType');   
-    this.saveUserType(userType);    
+  setUserType(userType) {
+    console.log('setUserType');
+    this.saveUserType(userType);
     this.setModalVisible(!this.state.modalVisible);
   }
   setModalVisible(visible) {
-    this.setState({modalVisible: visible});
+    this.setState({ modalVisible: visible });
   }
 
   render() {
     let feedbackView = null;
 
-    if(this.state.userType == 'sender')
+    if (this.state.userType == 'sender')
       feedbackView = <GiveFeedback></GiveFeedback>
 
-    if(this.state.userType == 'receiver')
+    if (this.state.userType == 'receiver')
       feedbackView = <ReceiveFeedback></ReceiveFeedback>
 
     return (
@@ -112,28 +112,28 @@ export default class HomeScreen extends React.Component {
           animationType="slide"
           transparent={false}
           visible={this.state.modalVisible}
-          onRequestClose={() => {alert("Modal has been closed.")}}
+          onRequestClose={() => { alert("Modal has been closed.") }}
         >
-         <View style={styles.wrapper}>
-          <View style={styles.flexContainer}>
-            <Text style={styles.heading}>Välkommen till F-appen!</Text>
+          <View style={styles.wrapper}>
+            <View style={styles.flexContainer}>
+              <Text style={styles.heading}>Välkommen till F-appen!</Text>
 
-          <View style={styles.center}>
-            <TouchableHighlight  onPress={() => {
-              this.setUserType('sender')
-            }}>
-              <Text style={styles.giveFeedbackBtn}>Ge Feedback</Text>
-            </TouchableHighlight>
-            </View>
-            <View style={styles.center}>
-            <TouchableHighlight onPress={() => {
-              this.setUserType('receiver')
-            }}>
-              <Text style={styles.receiveFeedbackBtn}>Ta emot Feedback</Text>
-            </TouchableHighlight>
+              <View style={styles.center}>
+                <TouchableHighlight onPress={() => {
+                  this.setUserType('sender')
+                }}>
+                  <Text style={styles.giveFeedbackBtn}>Ge Feedback</Text>
+                </TouchableHighlight>
+              </View>
+              <View style={styles.center}>
+                <TouchableHighlight onPress={() => {
+                  this.setUserType('receiver')
+                }}>
+                  <Text style={styles.receiveFeedbackBtn}>Ta emot Feedback</Text>
+                </TouchableHighlight>
+              </View>
             </View>
           </View>
-         </View>
         </Modal>
 
         {feedbackView}
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     marginTop: 100,
-    marginBottom:  50,
+    marginBottom: 50,
     fontSize: 36,
     textAlign: 'center',
   },
