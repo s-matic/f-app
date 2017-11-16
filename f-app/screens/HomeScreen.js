@@ -14,9 +14,9 @@ import {
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { WebBrowser } from 'expo';
 
-import {  SimpleLineIcons } from '@expo/vector-icons';
+import { SimpleLineIcons, MaterialIcons } from '@expo/vector-icons';
 import { MonoText } from '../components/StyledText';
-import { GiveFeedback } from '../components/GiveFeedback';
+import { SendFeedback } from '../components/SendFeedback';
 import { ReceiveFeedback } from '../components/ReceiveFeedback';
 import { style } from 'expo/src/Font';
 
@@ -103,7 +103,7 @@ export default class HomeScreen extends React.Component {
     let feedbackView = null;
 
     if(this.state.userType == 'sender')
-      feedbackView = <GiveFeedback></GiveFeedback>
+      feedbackView = <SendFeedback></SendFeedback>
 
     if(this.state.userType == 'receiver')
       feedbackView = <ReceiveFeedback></ReceiveFeedback>
@@ -120,22 +120,25 @@ export default class HomeScreen extends React.Component {
           <View style={styles.flexContainer}>
             <Text style={styles.heading}>Välkommen till F-appen!</Text>
 
-          <View style={styles.center}>
-            <TouchableHighlight  onPress={() => {
-              this.setUserType('sender')
-            }}>
-            <View style={styles.asd}>
-              <Text style={styles.giveFeedbackBtn}>Ge Feedback</Text>
-              <SimpleLineIcons name='present' size={30} color='white' />
-            </View>
-            </TouchableHighlight>
+            <View style={styles.center}>
+              <TouchableHighlight  onPress={() => {
+                this.setUserType('sender')
+              }}>
+                <View style={styles.asd}>
+                  <Text style={styles.SendFeedbackBtn}>Ge Feedback</Text>
+                  <SimpleLineIcons name='present' size={30} color='white' />
+                </View>
+              </TouchableHighlight>
             </View>
             <View style={styles.center}>
-            <TouchableHighlight onPress={() => {
-              this.setUserType('receiver')
-            }}>
-              <Text style={styles.receiveFeedbackBtn}>Ta emot Feedback</Text>
-            </TouchableHighlight>
+              <TouchableHighlight onPress={() => {
+                this.setUserType('receiver')
+              }}>
+                <View style={styles.asd}>
+                  <Text style={styles.receiveFeedbackBtn}>Ta emot Feedback</Text>
+                  <MaterialIcons name='call-received' size={30} color='white' />
+                </View>
+              </TouchableHighlight>
             </View>
           </View>
          </View>
@@ -182,7 +185,7 @@ export default class HomeScreen extends React.Component {
 }
 let giveFbg = '#103063';
 let receiveFbg = '#103063';
-let btnWidth = 270;
+let btnWidth = 260;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -206,21 +209,20 @@ const styles = StyleSheet.create({
     fontSize: 40,
     textAlign: 'center',
   },
-  giveFeedbackBtn: {
+  SendFeedbackBtn: {
     color: '#fff',
     paddingHorizontal: 10,
     paddingVertical: 25,
-    
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
+    marginRight: 5
   },
   receiveFeedbackBtn: {
     color: '#fff',
     backgroundColor: receiveFbg,
     paddingHorizontal: 10,
     paddingVertical: 25,
-    width: btnWidth,
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
