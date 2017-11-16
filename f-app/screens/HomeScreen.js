@@ -20,7 +20,8 @@ const API_ENDPOINT = 'localhost:5000/api/';
 export default class HomeScreen extends React.Component {
   state = {
     modalVisible: true,
-    feedbackList: {}
+    feedbackList: {},
+    userType: ''
   };
   static navigationOptions = {
     header: null,
@@ -75,14 +76,24 @@ export default class HomeScreen extends React.Component {
         ]
       };
       this.setState({ feedbackList: _feedbackList });
-  });
-}
+    });
+  }
 
+
+
+  setUserType(userType){
+    this.setModalVisible(!this.state.modalVisible);
+    this.saveUserType(userType);
+  }
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
 
   render() {
+    let feedbackView = null;
+    if(this.state.userType == 'sender')
+      feedbackView = <GiveFeedback></GiveFeedback>
+
     return (
       <View style={styles.container}>
         <Modal
@@ -97,14 +108,14 @@ export default class HomeScreen extends React.Component {
 
           <View style={styles.center}>
             <TouchableHighlight  onPress={() => {
-              this.setModalVisible(!this.state.modalVisible)
+              this.setUserType('sender')
             }}>
               <Text style={styles.giveFeedbackBtn}>Ge Feedback</Text>
             </TouchableHighlight>
             </View>
             <View style={styles.center}>
             <TouchableHighlight onPress={() => {
-              this.setModalVisible(!this.state.modalVisible)
+              this.setUserType('receiver')
             }}>
               <Text style={styles.reciveFeedbackBtn}>Ta emot Feedback</Text>
             </TouchableHighlight>
@@ -112,6 +123,7 @@ export default class HomeScreen extends React.Component {
           </View>
          </View>
         </Modal>
+
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
             <Image
