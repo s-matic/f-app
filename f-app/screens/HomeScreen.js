@@ -19,6 +19,7 @@ const API_ENDPOINT = 'localhost:5000/api/';
 export default class HomeScreen extends React.Component {
   state = {
     modalVisible: true,
+    feedbackList: {}
   };
   static navigationOptions = {
     header: null,
@@ -26,7 +27,7 @@ export default class HomeScreen extends React.Component {
 
   saveUserType(userType) {
     try {
-      await AsyncStorage.setItem('@FappStore:userType', userType);
+      AsyncStorage.setItem('@FappStore:userType', userType);
     } catch (error) {
       // Error saving data
     }
@@ -34,7 +35,7 @@ export default class HomeScreen extends React.Component {
 
   getUserType(){
     try {
-      const value = await AsyncStorage.getItem('@FappStore:userType');
+      const value = AsyncStorage.getItem('@FappStore:userType');
       if (value !== null){
         // We have data!!
         console.log(value);
@@ -47,17 +48,32 @@ export default class HomeScreen extends React.Component {
 
   getFeedback(){
     fetch(PUSH_ENDPOINT + 'feedback', {
-      method: 'POST',
+      method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        token: {
-          value: token,
-        },
-      }),
-    });
+      }
+    }).then(function(result){
+      let _feedbackList = {
+        feedback: [
+          {
+            Id: 1,
+            IsPositive: true,
+            Created: '2017-11-16 11:27'
+          },
+          {
+            id: 2,
+            IsPositive: true,
+            Created: '2017-11-16 11:36'            
+          },
+          {
+            id: 3,
+            IsPositive: false,
+            Created: '2017-11-16 12:10'            
+          }
+        ]
+      };
+      this.setState({ feedbackList: _feedbackList });
   }
 
   setModalVisible(visible) {
