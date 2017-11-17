@@ -19,13 +19,15 @@ export class ReceiveFeedback extends React.Component {
         </ScrollView>);
   }
 };
+let bg = '#00B8FF';
+let colorText= '#fff';
 const styles = StyleSheet.create({
     contentContainer: {
     paddingVertical: 20
     },
     wrapper: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: bg,
     }, 
     container: {
         marginTop: 20
@@ -33,6 +35,7 @@ const styles = StyleSheet.create({
     heading: {
         fontSize: 30,
         textAlign: 'center',
-        marginBottom: 20
+        marginBottom: 20,
+        color: colorText
     }
 });

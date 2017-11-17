@@ -9,7 +9,8 @@ import {
   View,
   Modal,
   TouchableHighlight,
-  AsyncStorage
+  AsyncStorage,
+  StatusBar
 } from 'react-native';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { WebBrowser } from 'expo';
@@ -66,6 +67,7 @@ export default class HomeScreen extends React.Component {
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
+  
 
   render() {
     let feedbackView = null;
@@ -86,7 +88,8 @@ export default class HomeScreen extends React.Component {
         >
           <View style={styles.container}>
             <View style={styles.flexContainer}>
-              <Text style={styles.heading}>Välkommen till F-appen!</Text>
+              <Text style={styles.heading}>Välkommen till </Text>
+              <Text style={styles.headingBottom}> F-appen!</Text>
 
             <View style={styles.center}>
               <TouchableHighlight  onPress={() => {
@@ -151,14 +154,16 @@ export default class HomeScreen extends React.Component {
     );
   };
 }
-let giveFbg = '#103063';
-let receiveFbg = '#103063';
+let giveFbg = '#00B8FF';
+let receiveFbg = '#00B8FF';
+let bg = '#00B8FF';
 let btnWidth = 260;
+let btnTextColor = '#fff';
+
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: '#fff',
-    
+    backgroundColor: bg,
   },
   flexContainer: {
 
@@ -166,6 +171,8 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 22,
     paddingHorizontal: 10,
+    backgroundColor: bg,
+    height: 10000
   },
   center: {
     alignItems: 'center',
@@ -173,21 +180,28 @@ const styles = StyleSheet.create({
   },
   heading: {
     marginTop: 100,
-    marginBottom: 50,
+    
     fontSize: 40,
     textAlign: 'center',
+    color: '#fff'
+  },
+  headingBottom: {
+    fontSize:40, 
+    color:'#fff', 
+    marginBottom: 50, 
+    textAlign: 'center'
   },
   SendFeedbackBtn: {
-    color: '#fff',
+    color: btnTextColor,
     paddingHorizontal: 10,
     paddingVertical: 25,
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
-    marginRight: 5
+    marginRight: 5,
   },
   receiveFeedbackBtn: {
-    color: '#fff',
+    color: btnTextColor,
     backgroundColor: receiveFbg,
     paddingHorizontal: 10,
     paddingVertical: 25,
@@ -202,6 +216,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: btnWidth,
+    borderColor: btnTextColor,
+    borderWidth: 2,
   },
   developmentModeText: {
     marginBottom: 20,
