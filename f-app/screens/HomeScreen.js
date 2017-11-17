@@ -10,7 +10,7 @@ import {
   Modal,
   TouchableHighlight,
   AsyncStorage,
-  StatusBar
+  StatusBar,
 } from 'react-native';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { WebBrowser } from 'expo';
@@ -20,6 +20,7 @@ import { MonoText } from '../components/StyledText';
 import { SendFeedback } from '../components/SendFeedback';
 import { ReceiveFeedback } from '../components/ReceiveFeedback';
 import { style } from 'expo/src/Font';
+import { CheckBox } from 'react-native-elements';
 
 const API_ENDPOINT = 'localhost:5000/api/';
 
@@ -27,7 +28,8 @@ export default class HomeScreen extends React.Component {
   state = {
     modalVisible: true,
     feedbackList: {},
-    userType: ''
+    userType: '',
+    instantFeedback: false
   };
   static navigationOptions = {
     header: null,
@@ -110,7 +112,19 @@ export default class HomeScreen extends React.Component {
                   <MaterialIcons name='call-received' size={30} color='white' />
                 </View>
               </TouchableHighlight>
+              <View style={styles.mTop}>
+                <CheckBox
+                  title='Direkt feedback'
+                  checked={this.state.instantFeedback}
+                  checkedColor='#244398'
+                  onPress={() => {
+                    value = !this.state.instantFeedback;
+                    this.setState({instantFeedback: value})
+                  }}
+                />
+              </View>   
             </View>
+        
           </View>
           </View>
         </Modal>
@@ -225,6 +239,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 19,
     textAlign: 'center',
+  },
+  mTop: {
+    marginTop: 25
   },
   contentContainer: {
     paddingTop: 30,
