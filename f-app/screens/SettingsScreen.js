@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, AsyncStorage } from 'react-native';
+import { View, StyleSheet, AsyncStorage, Alert } from 'react-native';
 import { ExpoConfigView } from '@expo/samples';
 import { Button } from 'react-native-elements'
 

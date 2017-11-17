@@ -10,7 +10,7 @@ import {
   Modal,
   TouchableHighlight,
   AsyncStorage,
-  StatusBar
+  StatusBar,
 } from 'react-native';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { WebBrowser } from 'expo';
@@ -21,13 +21,15 @@ import { SendFeedback } from '../components/SendFeedback';
 import { ReceiveFeedback } from '../components/ReceiveFeedback';
 import { style } from 'expo/src/Font';
 
+
 const API_ENDPOINT = 'localhost:5000/api/';
 
 export default class HomeScreen extends React.Component {
   state = {
     modalVisible: true,
     feedbackList: {},
-    userType: ''
+    userType: '',
+    instantFeedback: false
   };
   static navigationOptions = {
     header: null,
@@ -111,6 +113,7 @@ export default class HomeScreen extends React.Component {
                 </View>
               </TouchableHighlight>
             </View>
+        
           </View>
           </View>
         </Modal>
