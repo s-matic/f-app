@@ -20,7 +20,8 @@ export class SendFeedback extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                isPositive: _isPositive
+                isPositive: _isPositive,
+                instantFeedback: this.state.instantFeedback
             }),
         }).then(function () {
             Alert.alert(
@@ -54,6 +55,10 @@ export class SendFeedback extends React.Component {
                 <View style={styles.mTop}>
                     <CheckBox
                     title='Direkt feedback'
+                    containerStyle={styles.checkboxContainer}
+                    textStyle={styles.checkboxText}
+                    center= {true}
+                    uncheckedColor= '#fff'
                     checked={this.state.instantFeedback}
                     checkedColor='#244398'
                     onPress={() => {
@@ -92,4 +97,13 @@ const styles = StyleSheet.create({
     mTop: {
         marginTop: 185
       },
+    checkboxContainer: {
+        backgroundColor: bg,
+        borderWidth: 0,
+    },
+    checkboxText: {
+        color: '#fff',
+        fontSize: 20
+    }
+
 });
