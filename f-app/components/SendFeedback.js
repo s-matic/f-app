@@ -32,7 +32,6 @@ export class SendFeedback extends React.Component {
         });
     }
     render() {
-        //return <Text {...this.props} style={[this.props.style, { fontFamily: 'space-mono' }]} />;
         return <View style={styles.wrapper} contentContainerStyle={styles.contentContainer}>
             <View style={styles.container}>
                 <Text style={styles.heading}>Skicka feedback</Text>
@@ -61,12 +60,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     container: {
-        marginTop: 150
+        marginTop: 70
     },
     center: {
         alignItems: 'center',
         marginBottom: 30,
-        marginTop: 200,
+        marginTop: 60,
     },
     heading: {
         fontSize: 30,

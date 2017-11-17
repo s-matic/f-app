@@ -12,7 +12,7 @@ export class FeedbackList extends React.Component {
     state = {
         feedbackList: {},
     };
-
+    _keyExtractor = (item, isPositive) => item.id;
     getFeedback() {
         fetch(API_ENDPOINT + 'feedback', {
           method: 'GET',
@@ -37,18 +37,18 @@ export class FeedbackList extends React.Component {
           <View style={styles.wrapper}>
             <FlatList
               data={this.state.feedbackList}
+              keyExtractor={this._keyExtractor}
               renderItem={({item}) => 
-                <Grid>
-                    <Col size={5}>
+                <Grid style={styles.test}>
+                    <Col size={5} >
                     {
                         item.isPositive == true ?
                          <Feather name='thumbs-up' size={42} color='green' />
                         : 
                         <Feather name='thumbs-down' size={42} color='red' />                        
                         }
-                        <Text style={styles.item}></Text>
                     </Col>
-                    <Col size={4}>
+                    <Col size={4}> 
                         <Text style={styles.item}>{item.date}</Text>
                     </Col>
                   </Grid>
@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
     wrapper: {
         flex: 1,
         backgroundColor: '#fff',
-
     }, 
     container: {
 
@@ -75,8 +74,11 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     item: {
-        padding: 10,
         fontSize: 18,
-        height: 60,
+        height: 80,
+        alignSelf: 'center'
       },
+      test: {
+        paddingHorizontal: 25
+      }
 });

@@ -76,14 +76,14 @@ export default class HomeScreen extends React.Component {
       feedbackView = <ReceiveFeedback></ReceiveFeedback>
 
     return (
-      <View style={styles.container}>
+      <View style={styles.wrapper}>
         <Modal
           animationType="slide"
           transparent={false}
           visible={this.state.modalVisible}
           onRequestClose={() => { alert("Modal has been closed.") }}
         >
-          <View style={styles.wrapper}>
+          <View style={styles.container}>
             <View style={styles.flexContainer}>
               <Text style={styles.heading}>Välkommen till F-appen!</Text>
 
@@ -91,7 +91,7 @@ export default class HomeScreen extends React.Component {
               <TouchableHighlight  onPress={() => {
                 this.setUserType('sender')
               }}>
-                <View style={styles.asd}>
+                <View style={styles.btnWrapper}>
                   <Text style={styles.SendFeedbackBtn}>Ge Feedback</Text>
                   <SimpleLineIcons name='present' size={30} color='white' />
                 </View>
@@ -101,7 +101,7 @@ export default class HomeScreen extends React.Component {
               <TouchableHighlight onPress={() => {
                 this.setUserType('receiver')
               }}>
-                <View style={styles.asd}>
+                <View style={styles.btnWrapper}>
                   <Text style={styles.receiveFeedbackBtn}>Ta emot Feedback</Text>
                   <MaterialIcons name='call-received' size={30} color='white' />
                 </View>
@@ -154,15 +154,15 @@ let giveFbg = '#103063';
 let receiveFbg = '#103063';
 let btnWidth = 260;
 const styles = StyleSheet.create({
-  container: {
+  wrapper: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingHorizontal: 45
+    
   },
   flexContainer: {
 
   },
-  wrapper: {
+  container: {
     marginTop: 22,
     paddingHorizontal: 10,
   },
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  asd: {
+  btnWrapper: {
     display: 'flex',
     flexDirection: 'row',
     backgroundColor: giveFbg,
