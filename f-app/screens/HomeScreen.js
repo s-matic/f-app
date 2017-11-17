@@ -87,7 +87,8 @@ export default class HomeScreen extends React.Component {
         >
           <View style={styles.container}>
             <View style={styles.flexContainer}>
-              <Text style={styles.heading}>Välkommen till F-appen!</Text>
+              <Text style={styles.heading}>Välkommen till </Text>
+              <Text style={styles.headingBottom}> F-appen!</Text>
 
             <View style={styles.center}>
               <TouchableHighlight  onPress={() => {
@@ -178,10 +179,16 @@ const styles = StyleSheet.create({
   },
   heading: {
     marginTop: 100,
-    marginBottom: 50,
+    
     fontSize: 40,
     textAlign: 'center',
     color: '#fff'
+  },
+  headingBottom: {
+    fontSize:40, 
+    color:'#fff', 
+    marginBottom: 50, 
+    textAlign: 'center'
   },
   SendFeedbackBtn: {
     color: btnTextColor,
