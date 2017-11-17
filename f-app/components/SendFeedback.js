@@ -21,7 +21,7 @@ export class SendFeedback extends React.Component {
             },
             body: JSON.stringify({
                 isPositive: _isPositive,
-                instantFeedback: this.state.instantFeedback
+                isOverrideAble: this.state.instantFeedback
             }),
         }).then(function () {
             Alert.alert(
