@@ -3,6 +3,7 @@ import { Text, ScrollView, StyleSheet, View, TouchableOpacity, Alert } from 'rea
 import { Feather } from '@expo/vector-icons';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { style } from 'expo/src/Font';
+import { colors } from 'react-native-elements';
 
 const API_ENDPOINT = 'http://localhost:5002/api/';
 
@@ -38,12 +39,12 @@ export class SendFeedback extends React.Component {
                 <Grid>
                     <Col style={styles.center}>
                         <TouchableOpacity onPress={() => { this.saveFeedback(true) }}>
-                            <Feather name='thumbs-up' size={82} color='green' />
+                            <Feather name='thumbs-up' size={82} color='white' />
                         </TouchableOpacity>
                     </Col>
                     <Col style={styles.center}>
                         <TouchableOpacity onPress={() => { this.saveFeedback(false) }}>
-                            <Feather name='thumbs-down' size={82} color='red' />
+                            <Feather name='thumbs-down' size={82} color='white' />
                         </TouchableOpacity>
                     </Col>
                 </Grid>
@@ -51,13 +52,15 @@ export class SendFeedback extends React.Component {
         </View>
     }
 };
+let bg = '#00B8FF';
+let textColor = '#fff';
 const styles = StyleSheet.create({
     contentContainer: {
         paddingVertical: 20
     },
     wrapper: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: bg,
     },
     container: {
         marginTop: 70
@@ -69,6 +72,7 @@ const styles = StyleSheet.create({
     },
     heading: {
         fontSize: 30,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: textColor,
     }
 });

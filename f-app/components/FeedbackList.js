@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, ScrollView, StyleSheet, View, TouchableOpacity, FlatList, Image } from 'react-native';
-import { List, ListItem} from "react-native-elements";
+import { List, ListItem, colors} from "react-native-elements";
 import { Feather } from '@expo/vector-icons';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { style } from 'expo/src/Font';
@@ -39,13 +39,13 @@ export class FeedbackList extends React.Component {
               data={this.state.feedbackList}
               keyExtractor={this._keyExtractor}
               renderItem={({item}) => 
-                <Grid style={styles.test}>
+                <Grid style={styles.padding}>
                     <Col size={5} >
                     {
                         item.isPositive == true ?
-                         <Feather name='thumbs-up' size={42} color='green' />
+                         <Feather name='thumbs-up' size={42} color='white' />
                         : 
-                        <Feather name='thumbs-down' size={42} color='red' />                        
+                        <Feather name='thumbs-down' size={42} color='white' />                        
                         }
                     </Col>
                     <Col size={4}> 
@@ -58,27 +58,31 @@ export class FeedbackList extends React.Component {
         );
       }
 }
+let bg = '#00B8FF';
+let colorText = '#fff';
 const styles = StyleSheet.create({
     contentContainer: {
     paddingVertical: 20
     },
     wrapper: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: bg,
     }, 
     container: {
 
     },
     heading: {
         fontSize: 30,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: colorText,
     },
     item: {
         fontSize: 18,
         height: 80,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        color: colorText,
       },
-      test: {
+      padding: {
         paddingHorizontal: 25
       }
 });
