@@ -20,7 +20,7 @@ import { MonoText } from '../components/StyledText';
 import { SendFeedback } from '../components/SendFeedback';
 import { ReceiveFeedback } from '../components/ReceiveFeedback';
 import { style } from 'expo/src/Font';
-import { CheckBox } from 'react-native-elements';
+
 
 const API_ENDPOINT = 'localhost:5000/api/';
 
@@ -112,17 +112,6 @@ export default class HomeScreen extends React.Component {
                   <MaterialIcons name='call-received' size={30} color='white' />
                 </View>
               </TouchableHighlight>
-              <View style={styles.mTop}>
-                <CheckBox
-                  title='Direkt feedback'
-                  checked={this.state.instantFeedback}
-                  checkedColor='#244398'
-                  onPress={() => {
-                    value = !this.state.instantFeedback;
-                    this.setState({instantFeedback: value})
-                  }}
-                />
-              </View>   
             </View>
         
           </View>
@@ -239,9 +228,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 19,
     textAlign: 'center',
-  },
-  mTop: {
-    marginTop: 25
   },
   contentContainer: {
     paddingTop: 30,
