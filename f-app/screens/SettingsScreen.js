@@ -14,12 +14,13 @@ export default class SettingsScreen extends React.Component {
   };
   getUserType() {
     try {
-      const value = await AsyncStorage.getItem('@FappStore:userType');
-      if (value !== null) {
-        // We have data!!
-        console.log(value);
-        this.setState({userType: value})
-      }
+      const value = AsyncStorage.getItem('@FappStore:userType').then(function(){
+        if (value !== null) {
+          // We have data!!
+          console.log(value);
+          this.setState({userType: value})
+        }
+      }.bind(this));
     } catch (error) {
       // Error retrieving data'
       console.log(error);
@@ -57,7 +58,7 @@ export default class SettingsScreen extends React.Component {
     return <View style={styles.contentContainer}> 
       <Button title='Rensa feedbacklista' onPress={() => { this.clearFeedback() }} />
 
-      <Button title={feedbackText} onPress={() => { this.clearFeedback() }} buttonStyle={{backgroundColor: 'blue'}} />
+      {/*<Button title={feedbackText} onPress={() => { this.clearFeedback() }} buttonStyle={{backgroundColor: 'blue'}} />*/}
     </View>;
   }
 };

@@ -34,10 +34,10 @@ export default class HomeScreen extends React.Component {
     title: 'Feedback'
   };
 
-  saveUserType(userType) {
+  saveUserType(_userType) {
     try {
-      AsyncStorage.setItem('@FappStore:userType', userType);
-      this.setState({ userType: userType });
+      AsyncStorage.setItem('@FappStore:userType', _userType);
+      this.setState({ userType: _userType });
       console.log(this.state.userType);
     } catch (error) {
       // Error saving data
