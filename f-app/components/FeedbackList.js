@@ -45,7 +45,7 @@ export class FeedbackList extends React.Component {
                         item.isPositive == true ?
                          <Feather name='thumbs-up' size={42} color='white' />
                         : 
-                        <Feather name='thumbs-down' size={42} color='white' />                        
+                        <Feather name='thumbs-down' size={42} color='black' />                        
                         }
                     </Col>
                     <Col size={4}> 
