@@ -47,7 +47,7 @@ export class SendFeedback extends React.Component {
                         </Col>
                         <Col style={styles.center}>
                             <TouchableOpacity onPress={() => { this.saveFeedback(false) }}>
-                                <Feather name='thumbs-down' size={82} color='white' />
+                                <Feather name='thumbs-down' size={82} color='black' />
                             </TouchableOpacity>
                         </Col>
                     </Grid>
